@@ -2,11 +2,11 @@
 #include <stdlib.h>
 
 // criar estrutura de nodo
-typedef struct
-{
+typedef struct local Node;
+struct local{
     int value;
-    struct Node * next;
-} Node;
+    Node * next;
+};
 
 // criar estrutura de lista
 typedef struct
@@ -72,7 +72,7 @@ void add(LinkedList *ll, int element){
     if(ll->size==0)
         ll->head=ll->tail=novo;
     else{
-        ll->tail->next=(struct Node*) novo;
+        ll->tail->next=novo;
         ll->tail=novo;
     }
     ll->size++;
@@ -99,4 +99,15 @@ void clean(LinkedList *ll){
     }
     
 
+}
+
+int indexOf(LinkedList * ll, int element){
+    Node *aux = ll->head;
+    int idx=0;
+    while (aux!=NULL){
+        if(aux->value==element) return idx;
+        idx++;
+        aux=aux->next;
+    }
+    return -1;
 }
